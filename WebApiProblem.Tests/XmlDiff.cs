@@ -40,7 +40,7 @@ namespace WebApiProblem.Tests
 
                 var xmldiff = new XmlDiff(XmlDiffOptions.None
                     //XmlDiffOptions.IgnoreChildOrder |
-                    //  XmlDiffOptions.IgnoreNamespaces |
+                    | XmlDiffOptions.IgnoreNamespaces
                     //XmlDiffOptions.IgnorePrefixes
                     );
                 var identical = xmldiff.Compare(expectedDoc, actualDoc, writer);

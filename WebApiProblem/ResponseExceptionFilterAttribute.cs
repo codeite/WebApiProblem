@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Web.Http.Filters;
 
@@ -42,10 +43,16 @@ namespace WebApiProblem
                                               WebApiProblemNames.XmlMediaType)
                     };
                 }
-                else
+                else if (_responseExceptionFromat == ResponseExceptionFromat.Negotiate)
                 {
-                    actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(ex.StatusCode,
-                                                                                                  ex.ApiProblem);
+                    MethodInfo method = actionExecutedContext.Request.GetType().GetMethod("CreateResponse");
+                    MethodInfo genericMethod = method.MakeGenericMethod(new [] {ex.ApiProblem.GetType()});
+
+                    var response = genericMethod.Invoke(actionExecutedContext.Request,
+                                                        new object[] { ex.StatusCode, ex.ApiProblem }) as HttpResponseMessage;
+                    actionExecutedContext.Response = response;
+
+                    //actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(ex.StatusCode, ex.ApiProblem);
                 }
             }
             else

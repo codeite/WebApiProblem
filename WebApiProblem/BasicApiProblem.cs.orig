@@ -10,33 +10,35 @@ namespace WebApiProblem
     {
         [XmlElement("problemType")]
         [JsonProperty("problemType")]
-        [DataMember(Name = "problemType", Order = 100, EmitDefaultValue = false)]
+        [DataMember(Name = "problemType", Order = 1, EmitDefaultValue = false)]
         public string ProblemTypeUrl { get; set; }
 
         [XmlElement("title")]
         [JsonProperty("title")]
-        [DataMember(Name = "title", Order = 200, EmitDefaultValue = false)]
+        [DataMember(Name = "title", Order = 2, EmitDefaultValue = false)]
         public string Title { get; set; }
 
         [XmlElement("detail")]
+<<<<<<< HEAD
         [JsonProperty("detail")]
-        [DataMember(Name = "detail", Order = 300, EmitDefaultValue = false)]
         public string Detail { get; set; }
 
         [XmlElement("httpStatus")]
         [JsonProperty("httpStatus")]
-        [DataMember(Name = "httpStatus", Order = 400, EmitDefaultValue = false)]
         public string HttpStatus { get; set; }
 
         [XmlElement("details")]
         [JsonProperty("details")]
-        [DataMember(Name = "details", Order = 500, EmitDefaultValue = false)]
         public string Details { get; set; }
 
         [XmlElement("problemInstance")]
         [JsonProperty("problemInstance")]
-        [DataMember(Name = "problemInstance", Order = 600, EmitDefaultValue = false)]
         public string ProblemInstance { get; set; }
+=======
+        [JsonProperty("detail")]
+        [DataMember(Name = "detail", Order = 3, EmitDefaultValue = false)]
+        public string Detail { get; set; }
+>>>>>>> Marked up object with serialization attributes but had to use nasty reflection
 
     }
 }
