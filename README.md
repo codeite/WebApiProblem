@@ -41,4 +41,6 @@ It is based on the recomendations in http://tools.ietf.org/html/draft-nottingham
 		}
 
  
+## More elaborate problem messages
+ 
 To create more elaborate problem message, inherit from ApiProblemException<T> and define a serializable model that inherits from ApiProblem for T.
