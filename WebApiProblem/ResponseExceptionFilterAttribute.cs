@@ -7,13 +7,13 @@ namespace WebApiProblem
 {
     public class ResponseExceptionFilterAttribute : ExceptionFilterAttribute
     {
-        private readonly ResponseExceptionFromat _responseExceptionFromat;
+        private readonly ResponseExceptionFormat _responseExceptionFromat;
 
-        public ResponseExceptionFilterAttribute() : this(ResponseExceptionFromat.Negotiate)
+        public ResponseExceptionFilterAttribute() : this(ResponseExceptionFormat.Negotiate)
         {
         }
 
-        public ResponseExceptionFilterAttribute(ResponseExceptionFromat responseExceptionFromat)
+        public ResponseExceptionFilterAttribute(ResponseExceptionFormat responseExceptionFromat)
         {
             _responseExceptionFromat = responseExceptionFromat;
         }
@@ -24,7 +24,7 @@ namespace WebApiProblem
 
             if (ex != null)
             {
-                if (_responseExceptionFromat == ResponseExceptionFromat.Json)
+                if (_responseExceptionFromat == ResponseExceptionFormat.Json)
                 {
                     actionExecutedContext.Response = new HttpResponseMessage(ex.StatusCode)
                     {
@@ -33,7 +33,7 @@ namespace WebApiProblem
                                               WebApiProblemNames.JsonMediaType)
                     };
                 }
-                else if( _responseExceptionFromat == ResponseExceptionFromat.Xml)
+                else if( _responseExceptionFromat == ResponseExceptionFormat.Xml)
                 {
                     actionExecutedContext.Response = new HttpResponseMessage(ex.StatusCode)
                     {
