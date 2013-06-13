@@ -62,7 +62,7 @@
     <Compile Include="BasicApiProblemException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseExceptionFilterAttribute.cs" />
-    <Compile Include="ResponseExceptionFromat.cs" />
+    <Compile Include="ResponseExceptionFormat.cs" />
     <Compile Include="WebApiProblemNames.cs" />
   </ItemGroup>
   <ItemGroup>
