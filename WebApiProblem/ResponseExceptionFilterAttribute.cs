@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Web.Http.Filters;
 
@@ -42,10 +43,20 @@ namespace WebApiProblem
                                               WebApiProblemNames.XmlMediaType)
                     };
                 }
-                else
+                else if (_responseExceptionFromat == ResponseExceptionFromat.Negotiate)
                 {
-                    actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(ex.StatusCode,
-                                                                                                  ex.ApiProblem);
+                    // Not nice. CreateResponse uses the type of the reference to determine if the object can be serialized.
+                    // The type of our reference is ApiProblem (and interface) which can not be Xml serialized.
+                    // The object in the reference is BasicApiProblem which can be serialized.
+                    // Used reflection to call the method with the actual type rather than the reference type.
+                    var method = actionExecutedContext.Request.GetType().GetMethod("CreateResponse");
+                    var genericMethod = method.MakeGenericMethod(new [] {ex.ApiProblem.GetType()});
+
+                    var response = genericMethod.Invoke(actionExecutedContext.Request,
+                                                        new object[] { ex.StatusCode, ex.ApiProblem }) as HttpResponseMessage;
+                    actionExecutedContext.Response = response;
+
+                    //actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(ex.StatusCode, ex.ApiProblem);
                 }
             }
             else
