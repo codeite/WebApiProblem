@@ -43,7 +43,7 @@ namespace WebApiProblem
                                               WebApiProblemNames.XmlMediaType)
                     };
                 }
-                else if (_responseExceptionFromat == ResponseExceptionFromat.Negotiate)
+                else if (_responseExceptionFromat == ResponseExceptionFormat.Negotiate)
                 {
                     // Not nice. CreateResponse uses the type of the reference to determine if the object can be serialized.
                     // The type of our reference is ApiProblem (and interface) which can not be Xml serialized.
