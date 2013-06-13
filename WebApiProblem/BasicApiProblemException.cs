@@ -26,7 +26,7 @@ namespace WebApiProblem
 
         private string SerializeToJson()
         {
-            var serializer = JsonSerializer.Create(new JsonSerializerSettings());
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
 
             using(var writer = new StringWriter())
             {
