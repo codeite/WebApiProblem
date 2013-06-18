@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using NUnit.Framework;
 
-namespace WebApiProblem.Tests
+namespace WebApiProblem.Tests.UnitTests
 {
     [TestFixture]
     public class TestSerialization

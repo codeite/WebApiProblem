@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
@@ -49,14 +50,27 @@ namespace WebApiProblem
                     // The type of our reference is ApiProblem (and interface) which can not be Xml serialized.
                     // The object in the reference is BasicApiProblem which can be serialized.
                     // Used reflection to call the method with the actual type rather than the reference type.
-                    var method = actionExecutedContext.Request.GetType().GetMethod("CreateResponse");
-                    var genericMethod = method.MakeGenericMethod(new [] {ex.ApiProblem.GetType()});
+                    
+                    // The below code is what the reflection is emulating is that syntax was available
+                    //actionExecutedContext.Response = actionExecutedContext.Request
+                    //  .CreateResponse<ex.ApiProblem.GetType()>(ex.StatusCode, ex.ApiProblem);
+                    //return;
+                    
+                    var methodReflectionHelper = new MethodReflectionHelper();
 
-                    var response = genericMethod.Invoke(actionExecutedContext.Request,
-                                                        new object[] { ex.StatusCode, ex.ApiProblem }) as HttpResponseMessage;
-                    actionExecutedContext.Response = response;
+                    // Get the method we want to invoke using static reflection
+                    Expression<Func<object>> action = () => actionExecutedContext.Request.CreateResponse(ex.StatusCode, ex.ApiProblem);
+                    var method = methodReflectionHelper.GetMethod(action);
 
-                    //actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(ex.StatusCode, ex.ApiProblem);
+                    // Change the method to use the correct generic argument
+                    var genericMethod = method
+                        .GetGenericMethodDefinition()
+                        .MakeGenericMethod(new [] {ex.ApiProblem.GetType()});
+
+                    // Invoke the method
+                    actionExecutedContext.Response = genericMethod.Invoke(
+                                                        actionExecutedContext.Request,
+                                                        new object[] {actionExecutedContext.Request, ex.StatusCode, ex.ApiProblem }) as HttpResponseMessage;
                 }
             }
             else
@@ -83,6 +97,16 @@ namespace WebApiProblem
             }
 
             return null;
+        }
+    }
+
+    public class MethodReflectionHelper
+    {
+        public MethodInfo GetMethod(Expression<Func<object>> func)
+        {
+            var body = func.Body as MethodCallExpression;
+            
+            return body == null ? null : body.Method;
         }
     }
 }

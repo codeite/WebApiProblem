@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Shouldly;
+﻿using FluentAssertions;
 using WebApiProblem.Tests.Json;
 
-namespace WebApiProblem.Tests
+namespace WebApiProblem.Tests.UnitTests
 {
     internal static class JsonAssertHelper
     {
@@ -16,7 +12,7 @@ namespace WebApiProblem.Tests
             var actualCanonical = jsonCannonicalizer.Cannonicalize(actual);
             var expectedCanonical = jsonCannonicalizer.Cannonicalize(expected);
 
-            actualCanonical.ShouldBe(expectedCanonical);
+            actualCanonical.Should().Be(expectedCanonical);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.IO;
 using System.Xml;
 using Microsoft.XmlDiffPatch;
 
-namespace WebApiProblem.Tests
+namespace WebApiProblem.Tests.UnitTests
 {
     public class XmlDiffAssert
     {
