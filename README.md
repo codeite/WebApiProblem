@@ -9,11 +9,11 @@ It is based on the recomendations in http://tools.ietf.org/html/draft-nottingham
 
 It supports responses in json:
 
-application/api-problem+json
+_application/api-problem+json_
 
 and xml:
 
-application/api-problem+xml
+_application/api-problem+xml_
 
 ## Use
 
