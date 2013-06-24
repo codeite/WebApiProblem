@@ -3,7 +3,7 @@ WebApiProblem
 
 ## application/api-problem
 
-A small framework for turning exceptions into good Rest responses in WebApi.
+A small framework for turning exceptions into good Rest responses in MVC WebApi (.net).
 
 It is based on the recomendations in http://tools.ietf.org/html/draft-nottingham-http-problem-03
 
