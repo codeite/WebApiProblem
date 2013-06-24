@@ -1,7 +1,7 @@
 WebApiProblem
 =============
 
-## application/api-problem
+__application/api-problem__
 
 A small framework for turning exceptions into good Rest responses in MVC WebApi (.net).
 
