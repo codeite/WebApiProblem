@@ -10,6 +10,11 @@ namespace WebApiProblem
         public ApiProblem ApiProblem { get; protected set; }
 
         public abstract string Serialize(string contentType);
+
+        public override string Message
+        {
+            get { return ApiProblem.Detail; }
+        }
     }
 
     public interface ApiProblemException

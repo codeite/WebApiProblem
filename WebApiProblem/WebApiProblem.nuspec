@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/codeite/WebApiProblem</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A small framework for turning exceptions into good Rest responses in WebApi. Based on the IETF draft at http://tools.ietf.org/html/draft-nottingham-http-problem-03</description>
-    <releaseNotes>Re-wrote reflection to ensure Content negotiation works</releaseNotes>
+    <releaseNotes>Tweeked excaption so 'Detail' is shown in Exception message.</releaseNotes>
     <tags>webapi exception api-problem</tags>
   </metadata>
 </package>
