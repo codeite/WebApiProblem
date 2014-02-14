@@ -8,8 +8,8 @@
     <owners>Sam Plews</owners>
     <projectUrl>https://github.com/codeite/WebApiProblem</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A small framework for turning exceptions into good Rest responses in WebApi. Based on the IETF draft at http://tools.ietf.org/html/draft-nottingham-http-problem-03</description>
-    <releaseNotes>Updated reference to .net 4.5</releaseNotes>
+    <description>A small framework for turning exceptions into good Rest responses in WebApi. Based on the IETF draft at http://tools.ietf.org/html/draft-nottingham-http-problem-04</description>
+    <releaseNotes>Updated reference to use latest version of WebApi</releaseNotes>
     <tags>webapi exception api-problem</tags>
   </metadata>
 </package>
